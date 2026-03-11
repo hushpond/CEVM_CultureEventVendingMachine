@@ -56,62 +56,51 @@ The project aims to solve the fragmentation of cultural information by providing
 
 ---
 
-## Evaluation Results
-
-### Quantitative Metrics
-* **Training Loss**: Successfully converged to **0.7**.
-* **ROUGE-L Score**: Achieved **0.83** on knowledge-intensive retrieval tasks, demonstrating high precision in extracting factual information from the provided context.
-
-### Qualitative Assessment
-* **Persona Switching**: The model successfully demonstrated persona-switching capabilities, such as prioritizing low-cost events for students and using appropriate honorifics for senior users.
-* **Hallucination Reduction**: Significantly reduced hallucinations by grounding responses in the retrieved metadata and persona constraints.
-
 ## Quantitative Metrics
 
 ### 1. Training Loss Convergence
-* [cite_start]**Loss Reduction**: The training loss successfully converged from an initial 1.8 to the 0.7 range during the fine-tuning process[cite: 803].
-* [cite_start]**Optimization Path**: Monitored through a step-by-step training process, the loss showed a consistent downward trend (e.g., 1.93 at step 10 to 0.30 at step 90)[cite: 699].
+* **Loss Reduction**: The training loss successfully converged from an initial 1.8 to the 0.7 range during the fine-tuning process.
+* **Optimization Path**: Monitored through a step-by-step training process, the loss showed a consistent downward trend, reaching as low as 0.30 at the final steps.
 
 ### 2. ROUGE-L Benchmarking
-* [cite_start]**Knowledge Retrieval (High Precision)**: The model achieved a ROUGE-L score of 0.83 on tasks requiring specific information extraction from the retrieved context[cite: 807].
-* [cite_start]**Generative Flexibility**: For general conversational responses (at temperature 0.5), the score was 0.046, indicating the model's ability to generate natural dialogue rather than verbatim copying[cite: 805, 806].
+* **Knowledge Retrieval (High Precision)**: The model achieved a ROUGE-L score of 0.83 on tasks requiring specific information extraction from the retrieved context.
+* **Generative Flexibility**: For general conversational responses, the score was recorded at 0.046, indicating the model's ability to generate natural, varied dialogue rather than verbatim copying.
 
 ### 3. Hyperparameter Optimization (LoRA Rank)
-* [cite_start]**Rank Analysis**: Experimental sweeps were conducted across ranks 8, 16, and 32 to identify the optimal balance between computational overhead and performance [cite: 716-759, 799].
-* [cite_start]**The "Sweet Spot"**: Rank 32 was identified as the optimal configuration, providing the lowest final loss (1.51) compared to Rank 8 (2.15) and Rank 16 (1.79) within the tested environment [cite: 751-759, 799].
+* **Rank Analysis**: Experimental sweeps were conducted across ranks 8, 16, and 32 to identify the optimal balance between computational overhead and performance.
+* **The "Sweet Spot"**: Rank 32 was identified as the optimal configuration, providing the lowest final loss (1.51) compared to Rank 8 (2.15) and Rank 16 (1.79) within the tested environment.
 
 ---
 
 ## Qualitative Assessment
 
 ### 1. Advanced Information Filtering
-* [cite_start]**Constraint Satisfaction**: The model successfully filtered event data based on complex queries, such as identifying performances under 15,000 KRW[cite: 811, 812].
-* [cite_start]**Factual Grounding**: By utilizing the RAG pipeline, the model reduced hallucinations by grounding its recommendations in verified public records[cite: 814, 840].
+* **Constraint Satisfaction**: The model successfully filtered event data based on complex queries, such as identifying performances under a specific price threshold (e.g., "under 15,000 KRW").
+* **Factual Grounding**: By utilizing the RAG pipeline, the model significantly reduced hallucinations by grounding its recommendations in verified public records.
 
 ### 2. Comparative Reasoning
-* [cite_start]**Nuance Detection**: The system demonstrated the ability to explain qualitative differences between retrieved items, such as describing the varying levels of intensity between "15+ rated" and "12+ rated" performances[cite: 816, 818].
+* **Nuance Detection**: The system demonstrated the ability to explain qualitative differences between retrieved items, such as describing the varying levels of intensity between "15+ rated" and "12+ rated" performances.
 
 ### 3. Multi-Persona Adaptation
-* [cite_start]**Tone and Manner**: Validation confirmed the model's ability to switch communication styles based on the user's profile, such as providing budget-focused advice for students and honorific-rich responses for senior citizens[cite: 566, 810].
+* **Tone and Manner**: Validation confirmed the model's ability to switch communication styles based on the user's profile, such as providing budget-focused advice for students and honorific-rich responses for senior citizens.
 
 ---
 
 ## Technical Constraints & Limitations
 
 ### 1. Quantization Trade-offs
-* [cite_start]**4-bit Compression**: To fit within the VRAM limits of the Google Colab T4 environment, 4-bit quantization (QLoRA) was utilized[cite: 488, 826].
-* [cite_start]**Impact**: While highly efficient, this compression may lead to slight degradations in the model's ability to capture extremely fine linguistic nuances compared to the uncompressed base model[cite: 825, 827].
+* **4-bit Compression**: To fit within the VRAM limits of the Google Colab T4 environment, 4-bit quantization (QLoRA) was utilized.
+* **Impact**: While highly efficient, this compression may lead to slight degradations in the model's ability to capture extremely fine linguistic nuances compared to the uncompressed base model.
 
 ### 2. Evaluation Scope
-* [cite_start]**Metric Subjectivity**: Standard metrics like ROUGE may not fully capture the context or "naturalness" of a persona-based response, suggesting a need for advanced LLM-based automated evaluation in future iterations[cite: 823, 824, 830].
+* **Metric Subjectivity**: Standard metrics like ROUGE may not fully capture the context or "naturalness" of a persona-based response, suggesting a need for advanced LLM-based automated evaluation in future iterations.
 
 ---
 
 ## Model Metadata
-* [cite_start]**Base Model**: beomi/Llama-3-Open-Ko-8B [cite: 593]
-* [cite_start]**Adapter**: hushpond/llama-3-seoul-culture-lora-rag [cite: 764]
-* [cite_start]**Framework**: PEFT / LoRA / QLoRA [cite: 488, 596, 606]
----
+* **Base Model**: beomi/Llama-3-Open-Ko-8B
+* **Adapter**: hushpond/llama-3-seoul-culture-lora-rag
+* **Framework**: PEFT / LoRA / QLoRA
 
 ## Model Access
 The fine-tuned LoRA adapter is hosted on Hugging Face:
